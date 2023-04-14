@@ -1,0 +1,65 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Site Homepage</title>
+    <!-- Link to Tailwind CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.1.1/tailwind.min.css">
+    <header class="bg-[#ef4444] shadow-md py-4 px-6">
+        <div class="flex justify-between items-center">
+            <h1 class="text-3xl font-bold text-red-800">Smart Billing</h1>
+            <div class="flex items-center">
+                <a href="{%url 'core:index'%}" class="text-gray-700 hover:text-gray-900 font-medium mr-4">Home</a>
+                <a href="{%url 'transcation:billing'%}" class="text-green-700 hover:text-green-900 font-medium mr-4">Bill</a>
+                <a href="#" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out font-medium">Naturals</a>
+
+                <a href="{%url 'cart:cart' %}" class="text-blue-700 hover:text-blue-900 font-medium mr-4">Cart</a> {% if user.is_authenticated %}
+                <a href="{% url 'user:logout' %}" class="text-yellow-700 hover:text-yellow-900 font-medium mr-4">LogOut</a> {% else %}
+                <a href="{%url 'transcation:mytranscation'%}" class="text-pink-700 hover:text-pink-900 font-medium mr-4">transcation</a>
+                <a href="{% url 'user:login'%}" class="text-indigo-700 hover:text-indigo-900 font-medium mr-4">Login</a> {% endif %}
+                <a href="{% url 'user:register'%}" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition duration-300 ease-in-out font-medium">Sign up</a>
+
+
+            </div>
+        </div>
+
+    </header>
+
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                $('.alert').fadeOut('slow');
+            }, 5000);
+        });
+    </script>
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-success text-xl text-blue-500">{{ message }}</div>
+    {% endfor %} {%endif%}
+
+    <div class=" mt-10 bg-gray-100 py-8 px-4 p-6">
+        <h1 class="text-3xl font-bold mb-8">Browse Our Delicious Food Categories</h1>
+
+
+        <div class="flex flex-wrap justify-center gap-8 ">
+            {% for category in categories %}
+            <a href="{% url 'item:detail' category.id%}" class="flex flex-col items-center justify-center bg-gray-100 rounded-md shadow-md hover:bg-red-200 transition duration-300 ease-in-out px-4 py-2">
+                {% if category.image %}
+                    <img class="w-52 h-52 object-cover rounded-full mb-4" src="{{category.image.url}}" alt="Category Image" width="800" height="">
+                {% else %}
+                <img class="w-52 h-52 object-cover rounded-full mb-4" src="media\default.jpg" alt="Category Image">
+                 {% endif %}
+                <h2 class="text-lg font-bold text-center ">{{category.name}}</h2>
+            </a> {%endfor%}
+        </div>
+    </div>
+
+</body>
+
+</html>
