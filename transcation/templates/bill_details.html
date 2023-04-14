@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% block content %}
+<div class="max-w-6xl mx-auto py-6 sm:px-6 lg:px-8">
+
+    <h1 class="text-3xl font-bold mb-6">DETAILS</h1>
+    {% if cart %}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for cart_item in cart %}
+
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            {% if cart_item.item.image %}
+            <img src="{{ cart_item.item.image.url }}" alt="{{ cart_item.item.name }}" class="w-full h-64 object-cover"> {% else %}
+            <img src="static\default.jpg" alt="{{ cart_item.item.name }}" class="w-full h-64 object-cover"> {%endif%}
+            <div class="p-4">
+                <h2 class="font-bold text-xl mb-2">{{ cart_item.item.name }}</h2>
+                <div class="mt-4 flex justify-between">
+                    <span class="text-gray-600">{{ cart_item.quantity }} x &#8377;{{ cart_item.item.price }}</span>
+                    <span class="text-gray-600">{{cart_item.total_price}}</span>
+
+
+                </div>
+            </div>
+        </div>
+        {% endfor %} {%else%}
+        <h1 class="text-3xl font-bold mb-6">{{error}}</h1>
+        {% endif %}
+    </div>
+    {% endblock %}

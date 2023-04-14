@@ -1,0 +1,8 @@
+{%if path%}
+<a href="{% url 'transcation:download_image' %}" download>
+    <img src="{{path}}" alt="Image" /> Click to download
+</a>
+
+{% else%}
+<p>sorry</p>
+{%endif%}

@@ -1,0 +1,60 @@
+{% extends 'base.html' %} {% block content %}
+<div class="min-h-screen bg-gray-100">
+    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <div class="overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="bg-white">
+                <div class="flex flex-col">
+                    <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Amount
+                                            </th>
+                                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Created At
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-gray-200">
+                                        {% for i in trans %}
+
+                                        <tr>
+                                            <a href="">
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <a href="#">
+                                                        <div class="text-sm font-medium text-gray-900">{{i.amount}}</div>
+                                                    </a>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <a href="#">
+                                                        <div class="text-sm text-gray-500">{{i.created_at}}</div>
+                                                    </a>
+                                                </td>
+
+                                        </tr>
+                                        </a>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p>hi</p>
+<form action="#">
+    <label for="coffee">favourite coffee</label>
+    <input type="text" name="coffee" id="coffe" list="coffee-list">
+    <datalist id="coffee-list">
+                        {% for i in trans%}
+                        <option value="{{i.created_at}}"">  
+                            {%endfor%}
+                    </datalist>
+</form>
+<p>bye</p>{% endblock %}
